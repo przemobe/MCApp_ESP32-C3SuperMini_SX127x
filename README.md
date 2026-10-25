@@ -1,12 +1,32 @@
-# MAppTemplate
+# MeshCore applications for ESP32-C3 SuperMini & SX127x
 
-Template to creating your own app using MeshCore as a lib
+Created from template: [MCAppTemplate](https://github.com/fdlamotte/MCAppTemplate).
 
-Populate `src` with your own source files (you can start from `simple_sensor`
+The applications use [MeshCore](https://github.com/meshcore-dev/MeshCore) as a lib.
 
-By default a limited number of files from the meshcore tree are compiled (the ones that are defined in `arduino_base` + sensor helpers). By defining a `*_PLATFORM` symbol (except for ESP32 where you define the `ESP32` symbol), corresponding helpers will be added. You can also add the variant files, by defining `MC_VARIANT` to the name of the variant you are using (but you can provide your own variant files).
+## PB_C3SuperMini_SX127x_repeater
+It is a 'simple_repeater' application for ESP32-C3 SuperMini board and SX127x radio chip.
 
-Some limitations:
-* `boards` files from MC must be copied to the repository (if not provided by platform)
-* the `pre_build.py` script must be called from `platformio.ini` if you are using `variants` defined in the MeshCore tree (it will configure `INCLUDEDIRS` to point to the variants directory in `.pio/libdeps`) and copy MC libs in `libdeps`
-* UI helpers are included according to `DISPLAY_CLASS`, you'll have to provide the display support libraries (Adafruit GFX for instance)
+## PB_C3SuperMini_SX127x_sensor_1w
+It is extended version of 'simple_sensor' application for ESP32-C3 SuperMini board and SX127x radio chip.
+It uses 1-Wire bus and DallasTemperature lib for reading temperature sensors.
+
+Channel #1 (```TELEM_CHANNEL_SELF```) is: Built-in MCU Temperature, battery measurements and number of detected 1-Wire sensors (as generic sensor).
+
+Channels #2+ are 1-Wire sensors temperature readings.
+
+## Pin connections
+
+Refer to platformio.ini file section 'PB_C3SuperMini_SX127x'.
+
+| code define | ESP32-C3 SuperMini board | device pin |
+|- | - | - |
+| P_LORA_DIO_0 | 3 | SX127x - DIO0 |
+| P_LORA_DIO_1 | - | unused |
+| P_LORA_NSS | 0 | SX127x - NSS |
+| P_LORA_RESET | 10 | SX127x - RST |
+| P_LORA_SCLK | 4 | SX127x - SCK |
+| P_LORA_MISO | 5 | SX127x - MISO |
+| P_LORA_MOSI | 6 | SX127x - MOSI |
+| P_LORA_TX_LED | 8 | LED on the board; lights up during radio transmission |
+| PIN_ONE_WIRE | 1 | 1-Wire / 18B20 Data (PB_C3SuperMini_SX127x_sensor_1w only)|
