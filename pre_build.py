@@ -23,7 +23,7 @@ for item in menv.get("BUILD_FLAGS", []):
         menv.Append(BUILD_FLAGS=[f"-I {variant_dir}"])
 
     elif "ADD_BUILD_FLAGS" in item :
-        build_flags_file = f"build_flags/{item.split("=",1)[1]}"
+        build_flags_file = f"build_flags/{item.split('=',1)[1]}"
         with open(build_flags_file, "r", encoding="utf-8") as f:
             for line in f:
                 if line.strip():
