@@ -41,10 +41,10 @@ AutoDiscoverRTCClock rtc_clock(fallback_clock);
     oneWireSensors.requestTemperatures();
     delay(750);
 
-    for (int i = 0; i < oneWireSensorsNumber; i++)
+    for (int index = 0; index < oneWireSensorsNumber; index++)
     {
-      float tempC = oneWireSensors.getTempCByIndex(0);
-      telemetry.addTemperature(TELEM_CHANNEL_SELF + 1 + i, tempC);
+      float tempC = oneWireSensors.getTempCByIndex(index);
+      telemetry.addTemperature(TELEM_CHANNEL_SELF + 1 + index, tempC);
     }
 
     return false; // do not care
